@@ -27,6 +27,17 @@ public class CelestialBody : MonoBehaviour
         RecalculateMass ();
     }
 
+    private void Start() {
+        // Update virtual game object
+        // TODO Fix this shit, it wants virtualbody not gameobject.
+        if (GameObject.Find("Virtual "+gameObject.name) == null) {
+            // Debug.Log("No");
+            FindObjectOfType<DrawOrbits>().CreateVirtualCopy(this);
+        } else {
+            FindObjectOfType<DrawOrbits>().UpdateVirtualCopy(this, GameObject.Find("Virtual "+gameObject.name).GetComponent<VirtualBody>());
+        }
+    }
+
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
         velocity += acceleration * timeStep;
     }
