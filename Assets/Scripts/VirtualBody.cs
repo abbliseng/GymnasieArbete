@@ -41,7 +41,7 @@ public class VirtualBody : MonoBehaviour
     public void UpdatePosition (float timeStep) {
         rb.MovePosition (rb.position + velocity * timeStep);
         if (i == DrawOrbits.steps){
-            GlobalVars.timeScale = 1f;
+            GlobalVars.timeScale = 4f;
             GlobalVars.simulateCelestialBodies = true;
             i++;
         }
@@ -69,5 +69,11 @@ public class VirtualBody : MonoBehaviour
         // }
         k++;
     }
+
+    // public void RecalculateMass () {
+    //     // tf.localScale = new Vector3(radius,radius,radius);
+    //     mass = surfaceGravity * radius * radius / GlobalVars.gravitationalConstant;
+    //     rb.mass = mass;
+    // }
 
 }

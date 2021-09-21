@@ -8,12 +8,27 @@ public class DrawOrbits : MonoBehaviour
     public static int steps = 1000;
     public static int width;
 
+
+    /*
+        TODO
+        Det är nåt fel när vb skapas utanför editorn. De blir ej rätt.
+
+    */
+
+    // private void Awake() {
+    //     CelestialBody[] simulationVictims = FindObjectsOfType<CelestialBody>();
+    //     foreach (CelestialBody victim in simulationVictims) {
+    //         CreateVirtualCopy(victim);
+    //     }
+    // }
+
     public void Draw() {
         CelestialBody[] simulationVictims = FindObjectsOfType<CelestialBody>();
         foreach (CelestialBody victim in simulationVictims) {
             CreateVirtualCopy(victim);
         }
     }
+
 
     public void DestroyVirtualBodies() {
 
@@ -35,8 +50,10 @@ public class DrawOrbits : MonoBehaviour
         // TODO Should probs be a better way for this too. Constructor?
         objToSpawnData.rb = objToSpawn.GetComponent<Rigidbody>();
         objToSpawnData.rb.useGravity = false;
+        // objToSpawnData.rb.mass = victim.mass; // Probs could be prettier
         objToSpawnData.mass = victim.mass;
         objToSpawnData.radius = victim.radius;
+        // ???
         if (victim.velocity == new Vector3(0,0,0)){
             objToSpawnData.initialVelocity = victim.initialVelocity;
         } else {
@@ -55,6 +72,5 @@ public class DrawOrbits : MonoBehaviour
         } else {
             target.velocity = victim.velocity;
         }
-
     }
 }

@@ -28,14 +28,15 @@ public class CelestialBody : MonoBehaviour
     }
 
     private void Start() {
-        // Update virtual game object
-        // TODO Fix this shit, it wants virtualbody not gameobject.
         if (GameObject.Find("Virtual "+gameObject.name) == null) {
-            // Debug.Log("No");
-            FindObjectOfType<DrawOrbits>().CreateVirtualCopy(this);
-        } else {
-            FindObjectOfType<DrawOrbits>().UpdateVirtualCopy(this, GameObject.Find("Virtual "+gameObject.name).GetComponent<VirtualBody>());
+            Debug.Log("No : " + gameObject.name);
+            // Create a virtualcopy
+            // DrawOrbits.CreateVirtualCopy(this);
         }
+        // } else {
+            // FindObjectOfType<DrawOrbits>().CreateVirtualCopy(this);
+            // FindObjectOfType<DrawOrbits>().UpdateVirtualCopy(this, GameObject.Find("Virtual "+gameObject.name).GetComponent<VirtualBody>());
+        // }
     }
 
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
