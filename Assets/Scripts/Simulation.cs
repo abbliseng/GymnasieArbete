@@ -18,9 +18,17 @@ public class Simulation : MonoBehaviour
     }
 
     void Awake () {
-        // bodies = FindObjectsOfType<CelestialBody> ();
         Time.fixedDeltaTime = GlobalVars.physicsTimeStep;
         Debug.Log ("Setting fixedDeltaTime to: " + GlobalVars.physicsTimeStep);
+    }
+
+    void keyHandler() {
+
+    }
+
+    void PlaceObject(GameObject placingObject) {
+        GlobalVars.placingObject = placingObject;
+        GlobalVars.placing = true;
     }
 
     private void FixedUpdate() {
@@ -28,22 +36,13 @@ public class Simulation : MonoBehaviour
         if (GlobalVars.simulateCelestialBodies) {
             UpdateCelestialBodyPhysics();
         }
-        if (GlobalVars.simulateVirtualBodies) {
-            UpdateVirtualBodyPhysics();
+        // Handle gameobject placing
+        if (GlobalVars.placing) {
+
         }
     }
 
-    private void UpdateVirtualBodyPhysics() {
-        vBodies = FindObjectsOfType<VirtualBody> (); // TODO Optimize, must be better way then to check all the time.
-        for (int i = 0; i < vBodies.Length; i++) {
-            Vector3 acceleration = CalculateAcceleration (vBodies[i].transform.position, vBodies[i]);
-            vBodies[i].UpdateVelocity (acceleration, GlobalVars.physicsTimeStep);
-        }
-
-        for (int i = 0; i < vBodies.Length; i++) {
-            vBodies[i].UpdatePosition (GlobalVars.physicsTimeStep);
-        }
-    }
+    
 
     private void UpdateCelestialBodyPhysics() {
         bodies = FindObjectsOfType<CelestialBody> (); // TODO Optimize, must be better way then to check all the time.
@@ -57,7 +56,7 @@ public class Simulation : MonoBehaviour
         }
     }
 
-    public static Vector3 CalculateAcceleration (Vector3 point, CelestialBody ignoreBody = null) {
+    public static Vector3 CalculateAcceleration (Vector3 point, CelestialBody ignoreBody) {
         Vector3 acceleration = Vector3.zero;
         foreach (var body in Instance.bodies) {
             if (body != ignoreBody) {
@@ -73,7 +72,7 @@ public class Simulation : MonoBehaviour
         return acceleration;
     }
     // TODO Too much code is reused, should be able to be merged right?
-    public static Vector3 CalculateAcceleration (Vector3 point, VirtualBody ignoreBody = null) {
+    public static Vector3 CalculateAcceleration (Vector3 point, VirtualBody ignoreBody) {
         Vector3 acceleration = Vector3.zero;
         foreach (var body in Instance.vBodies) {
             if (body != ignoreBody) {
@@ -97,7 +96,7 @@ public class Simulation : MonoBehaviour
     static Simulation Instance {
         get {
             if (instance == null) {
-                instance = FindObjectOfType<Simulation> ();
+                instance = FindObjectOfType<Simulation>();
             }
             return instance;
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[ExecuteInEditMode]
 [RequireComponent(typeof(Rigidbody))]
 public class VirtualBody : MonoBehaviour
 {
@@ -16,13 +16,17 @@ public class VirtualBody : MonoBehaviour
     public Vector3 initialVelocity;
     public Vector3 velocity;
 
+    public GameObject parent;
+    public CelestialBody parentCel;
+
     private int i = 0;
     private int k = 31;
 
-    public VirtualBody(float radius, Vector3 velocity, float mass) {
+    public VirtualBody(float radius, Vector3 velocity, float mass, GameObject sender) {
         this.radius = radius;
         this.velocity = velocity;
         this.mass = mass;
+        this.parent = sender;
     }
 
     void Awake () {
@@ -32,6 +36,15 @@ public class VirtualBody : MonoBehaviour
         rb = GetComponent<Rigidbody> ();
 
         //TODO Get and update all planet info from parent.
+        UpdatePlanetInfo();
+    }
+
+    // private void Update() {
+    //     UpdatePlanetInfo();
+    // }
+
+    private void OnValidate() {
+        UpdatePlanetInfo();
     }
 
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
@@ -63,17 +76,19 @@ public class VirtualBody : MonoBehaviour
             lr.SetPositions(points);
             k = 0;
         }
-        // } else if (k > 30) {
-        //     points.RemoveAt(0);
-        //     points[DrawOrbits.steps-1] = this.transform.position - this.transform.parent.position;
-        // }
         k++;
     }
 
-    // public void RecalculateMass () {
-    //     // tf.localScale = new Vector3(radius,radius,radius);
-    //     mass = surfaceGravity * radius * radius / GlobalVars.gravitationalConstant;
-    //     rb.mass = mass;
-    // }
+    public void UpdatePlanetInfo() {
+        mass = parentCel.mass;
+        rb.mass = mass;
+        radius = parentCel.radius;
+
+        if (parentCel.velocity == new Vector3(0,0,0)){
+            initialVelocity = parentCel.initialVelocity;
+        } else {
+            velocity = parentCel.velocity;
+        }
+    }
 
 }

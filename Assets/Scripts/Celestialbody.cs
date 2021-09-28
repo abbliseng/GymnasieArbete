@@ -14,29 +14,14 @@ public class CelestialBody : MonoBehaviour
 
     public Vector3 velocity { get; private set; }
     public float mass { get; private set; }
-    // // private double G = 6.67408 * Mathf.Pow(10,-11); // Should be a const
-    // public static List<CelestialBody> Attractors;
     
     public Rigidbody rb;
     public Transform tf;
 
     void Awake () {
-        rb = GetComponent<Rigidbody> ();
-        // tf = GetComponent<Transform> (); //This gets the wrong component, should get childs transform
+        rb = GetComponent<Rigidbody>();
         velocity = initialVelocity;
-        RecalculateMass ();
-    }
-
-    private void Start() {
-        if (GameObject.Find("Virtual "+gameObject.name) == null) {
-            Debug.Log("No : " + gameObject.name);
-            // Create a virtualcopy
-            // DrawOrbits.CreateVirtualCopy(this);
-        }
-        // } else {
-            // FindObjectOfType<DrawOrbits>().CreateVirtualCopy(this);
-            // FindObjectOfType<DrawOrbits>().UpdateVirtualCopy(this, GameObject.Find("Virtual "+gameObject.name).GetComponent<VirtualBody>());
-        // }
+        RecalculateMass();
     }
 
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
@@ -49,7 +34,7 @@ public class CelestialBody : MonoBehaviour
     }
 
     void OnValidate () {
-        RecalculateMass ();
+        RecalculateMass();
         gameObject.name = bodyName;
     }
 
