@@ -12,7 +12,7 @@ public static class GlobalVars
     public static int orbitSegments = 100;
 
     public static bool simulateCelestialBodies = true;
-    public static bool simulateVirtualBodies = true;
+    public static bool simulateVirtualBodies = false;
     // Place new spheres
     public static bool placing = false;
     public static GameObject placingObject = null;
