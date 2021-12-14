@@ -29,7 +29,7 @@ public class CreateSphere : MonoBehaviour
                 placingSphere = false;
             }
             // newSphere.transform.position = Utils.GetMousePositionInWorldSpace();
-            newSphere.transform.position = new Vector3(Utils.GetMousePositionInWorldSpace().x, 0, Utils.GetMousePositionInWorldSpace().z);
+            newSphere.transform.position = new Vector3(Utils.GetMousePositionInWorldSpace().x, Utils.GetMousePositionInWorldSpace().z, 10);
             // Display a placing grid to make it look better please.
         }
         // Display mini-menu that lets user enter in start velocity, mass and surface gravity
