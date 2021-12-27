@@ -9,17 +9,23 @@ public class MouseLook : MonoBehaviour
 
     float xRotation = 0f;
 
+    public bool moving = false;
+
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        if (!Input.GetKey(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            moving = !moving;   
+        }
+        if (moving)
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;        
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
             xRotation -= mouseY;
@@ -31,6 +37,5 @@ public class MouseLook : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
         }
-
     }
 }
