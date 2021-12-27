@@ -15,7 +15,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (!Input.GetKey(KeyCode.LeftAlt))
         {
             Cursor.lockState = CursorLockMode.Locked;
 
