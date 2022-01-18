@@ -22,7 +22,7 @@ public class MovementScript : MonoBehaviour
         // TODO: Make the camera move backwards and forwards using the scrill wheel.
 
 
-        /* Controll height movement with space and shift
+        /* Moving using space and shift
         if (Input.GetButton("Jump")) {
             velocity.y = 1f;
         } else if(Input.GetKey(KeyCode.LeftShift)) {
@@ -31,7 +31,7 @@ public class MovementScript : MonoBehaviour
             velocity.y = 0f;
         }
         */
-
+        /*
         float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");           //This little peece of code is written by JelleWho https://github.com/jellewie
         if (ScrollWheelChange != 0)
         {                                            //If the scrollwheel has changed
@@ -50,6 +50,7 @@ public class MovementScript : MonoBehaviour
         }
 
 
+        */
         controller.Move(velocity * speed * Time.deltaTime);
     }
 }

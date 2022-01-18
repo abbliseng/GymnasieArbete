@@ -28,6 +28,7 @@ public class RaycastPlacing : MonoBehaviour
                 {
                     if (hit.transform.gameObject.tag == "PlacingPlane")
                     {
+                        Debug.Log("Instantiating new sphere to place");
                         currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity);
                     }
                 } else if (!placing)

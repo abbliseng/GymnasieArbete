@@ -228,9 +228,9 @@ GameObject:
   - component: {fileID: 875485751}
   - component: {fileID: 875485750}
   - component: {fileID: 875485749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: PlacingPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,3 +373,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efcec04abb40927489b076dc6783ec65, type: 3}
+--- !u!1 &1911814188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3225058802405642817, guid: efcec04abb40927489b076dc6783ec65, type: 3}
+  m_PrefabInstance: {fileID: 1468930949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1911814189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911814188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac00ab6891842b43b3b683fd2cc5381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokeForce: 0
+  sphere: {fileID: 5330467391111431600, guid: fa51d0adc53c6de419efad21fcc50f10, type: 3}
+  placing: 0
+  currentlyPlacing: {fileID: 0}
