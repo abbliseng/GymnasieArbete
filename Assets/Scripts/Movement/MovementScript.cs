@@ -19,7 +19,6 @@ public class MovementScript : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        // TODO: Make the camera move backwards and forwards using the scrill wheel.
 
 
         /* Moving using space and shift
@@ -31,7 +30,8 @@ public class MovementScript : MonoBehaviour
             velocity.y = 0f;
         }
         */
-        /*
+        
+        // TODO: Make the camera move backwards and forwards using the scrill wheel.
         float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");           //This little peece of code is written by JelleWho https://github.com/jellewie
         if (ScrollWheelChange != 0)
         {                                            //If the scrollwheel has changed
@@ -46,11 +46,12 @@ public class MovementScript : MonoBehaviour
             float CamX = Camera.main.transform.position.x;                      //Get current camera postition for the offset
             float CamY = Camera.main.transform.position.y;                      //^
             float CamZ = Camera.main.transform.position.z;                      //^
-            Camera.main.transform.position = new Vector3(CamX + X, CamY + Y, CamZ + Z);//Move the whole player
+            Camera.main.transform.position = new Vector3(CamX + X, CamY + Y, CamZ + Z);//Moving only the camera (not player object)
+            transform.position = new Vector3(CamX + X, CamY + Y, CamZ + Z);//Move the whole player
         }
 
 
-        */
+        
         controller.Move(velocity * speed * Time.deltaTime);
     }
 }
