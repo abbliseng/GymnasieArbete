@@ -21,6 +21,8 @@ public class MouseMovement : MonoBehaviour
     public CharacterController characterController;
     public float speed = 6.0f;
 
+    public Transform cam;
+
     // Use this for initialization
     void Start()
     {
@@ -39,7 +41,7 @@ public class MouseMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg + C
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         }
 
         // Handles rotation
