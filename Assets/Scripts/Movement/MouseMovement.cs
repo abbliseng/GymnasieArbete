@@ -5,7 +5,7 @@ public class MouseMovement : MonoBehaviour
 {
 
     protected Transform _XForm_Camera;
-    protected Transform _XForm_Parent;
+    protected Transform _XForm_CameraPivot;
 
     protected Vector3 _LocalRotation;
     protected float _CameraDistance = 10f;
@@ -14,39 +14,39 @@ public class MouseMovement : MonoBehaviour
     public float ScrollSensitvity = 2f;
     public float OrbitDampening = 10f;
     public float ScrollDampening = 6f;
+    public float maxZoomOut = 100f;
 
     public bool CameraDisabled = false;
 
     [Header("Movement")]
+    public GameObject sphere;
     public CharacterController characterController;
     public float speed = 6.0f;
-
-    public Transform cam;
 
     // Use this for initialization
     void Start()
     {
         this._XForm_Camera = this.transform;
-        this._XForm_Parent = this.transform.parent;
+        this._XForm_CameraPivot = this.transform.parent;
     }
 
     void LateUpdate()
     {
         // Movement
-
-        // https://www.youtube.com/watch?v=4HpC--2iowE&ab_channel=Brackeys
-
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-        if (direction.magnitude >= 0.1f)
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 dir = new Vector3(h, 0f, v).normalized;
+        if (dir.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        }
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + this._XForm_CameraPivot.eulerAngles.y;
+            sphere.transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
+            Vector3 mDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            characterController.Move(mDir.normalized * speed * Time.deltaTime);
+        }
         // Handles rotation
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-            CameraDisabled = !CameraDisabled;
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //    CameraDisabled = !CameraDisabled;
 
         if (!CameraDisabled)
         {
@@ -74,13 +74,14 @@ public class MouseMovement : MonoBehaviour
 
                 this._CameraDistance += ScrollAmount * -1f;
 
-                this._CameraDistance = Mathf.Clamp(this._CameraDistance, 1.5f, 100f);
+                this._CameraDistance = Mathf.Clamp(this._CameraDistance, 1.5f, maxZoomOut);
             }
         }
 
         //Actual Camera Rig Transformations
+        sphere.transform.rotation = Quaternion.Euler(0, _LocalRotation.x, 0);
         Quaternion QT = Quaternion.Euler(_LocalRotation.y, _LocalRotation.x, 0);
-        this._XForm_Parent.rotation = Quaternion.Lerp(this._XForm_Parent.rotation, QT, Time.deltaTime * OrbitDampening);
+        this._XForm_CameraPivot.rotation = Quaternion.Lerp(this._XForm_CameraPivot.rotation, QT, Time.deltaTime * OrbitDampening);
 
         if (this._XForm_Camera.localPosition.z != this._CameraDistance * -1f)
         {

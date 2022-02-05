@@ -19,19 +19,26 @@ public class RaycastPlacing : MonoBehaviour
 
         LayerMask mask = LayerMask.GetMask("RaycastHitPlane");
        
-        if (Cursor.lockState == CursorLockMode.Confined)
+        if (Cursor.lockState != CursorLockMode.Locked)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 placing = !placing;
                 if (placing && Physics.Raycast(ray, out hit, 1000.0f, mask))
                 {
+                    Debug.Log("HIT");
                     if (hit.transform.gameObject.tag == "PlacingPlane")
                     {
-                        // Debug.Log("Instantiating new sphere to place");
+                        Debug.Log("Instantiating new sphere to place");
                         currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity);
                     }
-                } else if (!placing)
+                } 
+                else if (placing)
+                {
+                    Debug.Log("Couldn't find hit");
+                    placing = !placing;
+                }
+                else if (!placing)
                 {
                     if (currentlyPlacing != null)
                     {
