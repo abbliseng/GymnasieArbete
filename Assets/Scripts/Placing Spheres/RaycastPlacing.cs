@@ -56,11 +56,23 @@ public class RaycastPlacing : MonoBehaviour
                     if (Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
                     {
                         currentlyPlacing.transform.position = new Vector3(hit.point.x, currentlyPlacing.transform.position.y, hit.point.z);
+                        if (currentlyPlacing.transform.position.y != 0)
+                        {
+                            LineRenderer lr;
+                            if (currentlyPlacing.GetComponent<LineRenderer>() == null)
+                            {
+                                currentlyPlacing.AddComponent<LineRenderer>();
+                            }
+                            lr = currentlyPlacing.GetComponent<LineRenderer>();
+                            lr.startWidth = 1f;
+                            lr.endWidth = 1f;
+                            lr.startColor = Color.white;
+                            lr.SetPositions(new[] { currentlyPlacing.transform.position, hit.point });
+                        }
                     }
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f && Input.GetKey(KeyCode.LeftControl))
                     {
                         float ScrollAmount = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitvity;
-                        //Debug.Log(ScrollAmount);
                         currentlyPlacing.transform.position += new Vector3(0, ScrollAmount, 0);
                     }
                 }
@@ -68,6 +80,8 @@ public class RaycastPlacing : MonoBehaviour
             // Lock the sphere's position when lmb is pressed.
             if (Input.GetMouseButtonDown(0) && placing)
             {
+                Destroy(currentlyPlacing.GetComponent<LineRenderer>());
+
                 placing = false;
                 currentlyPlacing = null;
             }
