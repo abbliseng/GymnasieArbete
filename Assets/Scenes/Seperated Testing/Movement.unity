@@ -455,7 +455,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875485748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
@@ -618,7 +618,8 @@ MonoBehaviour:
   CameraDisabled: 0
   sphere: {fileID: 750562335}
   characterController: {fileID: 750562340}
-  speed: 32
+  defSpeed: 48
+  speedMult: 3
 --- !u!1 &1593153389
 GameObject:
   m_ObjectHideFlags: 0

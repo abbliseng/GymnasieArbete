@@ -21,20 +21,33 @@ public class MouseMovement : MonoBehaviour
     [Header("Movement")]
     public GameObject sphere;
     public CharacterController characterController;
-    public float speed = 6.0f;
+    public float defSpeed = 24f;
+    public float speedMult = 3f;
+    private float speed;
 
     // Use this for initialization
     void Start()
     {
         this._XForm_Camera = this.transform;
         this._XForm_CameraPivot = this.transform.parent;
+        this.speed = defSpeed;
+    }
+
+    private void Update()
+    {
+        
     }
 
     void LateUpdate()
     {
         // Movement
-        
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = defSpeed * speedMult;
+        } else
+        {
+            speed = 24f;
+        }
 
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -69,7 +82,7 @@ public class MouseMovement : MonoBehaviour
                 }
             }
             //Zooming Input from our Mouse Scroll Wheel
-            if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+            if (Input.GetAxis("Mouse ScrollWheel") != 0f && !Input.GetKey(KeyCode.LeftControl))
             {
                 float ScrollAmount = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitvity;
 
