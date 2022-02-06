@@ -10,6 +10,7 @@ public class RaycastPlacing : MonoBehaviour
     public GameObject sphere;
     public bool placing = false;
     public GameObject currentlyPlacing = null;
+    public float ScrollSensitvity = 2f;
     public Camera cam;
 
     private float raycastMaxDistance = 100000.0f;
@@ -28,16 +29,16 @@ public class RaycastPlacing : MonoBehaviour
                 placing = !placing;
                 if (placing && Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
                 {
-                    Debug.Log("HIT");
+                    //Debug.Log("HIT");
                     if (hit.transform.gameObject.tag == "PlacingPlane")
                     {
-                        Debug.Log("Instantiating new sphere to place");
+                        //Debug.Log("Instantiating new sphere to place");
                         currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity);
                     }
                 } 
                 else if (placing)
                 {
-                    Debug.Log("Couldn't find hit");
+                    //Debug.Log("Couldn't find hit");
                     placing = !placing;
                 }
                 else if (!placing)
@@ -50,9 +51,18 @@ public class RaycastPlacing : MonoBehaviour
                 }
             } else
             {
-                if (placing && Physics.Raycast(ray, out hit, raycastMaxDistance, mask) && currentlyPlacing != null)
+                if (placing && currentlyPlacing != null)
                 {
-                    currentlyPlacing.transform.position = hit.point;
+                    if (Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
+                    {
+                        currentlyPlacing.transform.position = new Vector3(hit.point.x, currentlyPlacing.transform.position.y, hit.point.z);
+                    }
+                    if (Input.GetAxis("Mouse ScrollWheel") != 0f && Input.GetKey(KeyCode.LeftControl))
+                    {
+                        float ScrollAmount = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitvity;
+                        //Debug.Log(ScrollAmount);
+                        currentlyPlacing.transform.position += new Vector3(0, ScrollAmount, 0);
+                    }
                 }
             }
             // Lock the sphere's position when lmb is pressed.
