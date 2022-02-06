@@ -10,12 +10,14 @@ public class RaycastPlacing : MonoBehaviour
     public GameObject sphere;
     public bool placing = false;
     public GameObject currentlyPlacing = null;
+    public Camera cam;
 
+    private float raycastMaxDistance = 100000.0f;
 
     private void Update()
     {
         RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = cam.ScreenPointToRay(Input.mousePosition);
 
         LayerMask mask = LayerMask.GetMask("RaycastHitPlane");
        
@@ -24,7 +26,7 @@ public class RaycastPlacing : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 placing = !placing;
-                if (placing && Physics.Raycast(ray, out hit, 1000.0f, mask))
+                if (placing && Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
                 {
                     Debug.Log("HIT");
                     if (hit.transform.gameObject.tag == "PlacingPlane")
@@ -48,7 +50,7 @@ public class RaycastPlacing : MonoBehaviour
                 }
             } else
             {
-                if (placing && Physics.Raycast(ray, out hit, 1000.0f, mask) && currentlyPlacing != null)
+                if (placing && Physics.Raycast(ray, out hit, raycastMaxDistance, mask) && currentlyPlacing != null)
                 {
                     currentlyPlacing.transform.position = hit.point;
                 }
@@ -68,26 +70,5 @@ public class RaycastPlacing : MonoBehaviour
             }
             currentlyPlacing = null;
         }
-
-        /*
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-            if (Physics.Raycast(ray, out hit, 1000.0f, mask))
-            {
-                if (hit.transform.gameObject.tag == "PlacingPlane")
-                {
-                    Debug.Log("Hit the ground at: " + hit.point);
-                    Instantiate(sphere, hit.point, Quaternion.identity);
-                }
-
-                if (hit.rigidbody != null)
-                {
-                    hit.rigidbody.AddForceAtPosition(ray.direction * pokeForce, hit.point);
-                }
-            }
-        }
-        */
-
     }
 }

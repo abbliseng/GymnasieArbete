@@ -414,6 +414,7 @@ MonoBehaviour:
   sphere: {fileID: 5330467391111431600, guid: fa51d0adc53c6de419efad21fcc50f10, type: 3}
   placing: 0
   currentlyPlacing: {fileID: 0}
+  cam: {fileID: 1192937288}
 --- !u!1 &875485748
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +443,7 @@ MeshCollider:
   m_GameObject: {fileID: 875485748}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -457,7 +458,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -563,7 +564,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -613,7 +614,7 @@ MonoBehaviour:
   ScrollSensitvity: 2
   OrbitDampening: 100
   ScrollDampening: 6
-  maxZoomOut: 200
+  maxZoomOut: 1000
   CameraDisabled: 0
   sphere: {fileID: 750562335}
   characterController: {fileID: 750562340}
