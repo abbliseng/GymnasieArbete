@@ -15,6 +15,29 @@ public class RaycastPlacing : MonoBehaviour
     public GameObject parent;
 
     private float raycastMaxDistance = 100000.0f;
+    [Header("Planet Preset Stuff")]
+    public GameObject basic;
+    public ColourSettings colourSettings;
+    public ShapeSettings shapeSettings;
+
+    public GameObject PlacePlanet(Vector3 point, Quaternion quar, Transform p)
+    {
+        // Create basic
+        GameObject newPlanet = Instantiate(basic, new Vector3(0,0,0), quar, p);
+        Transform model = newPlanet.transform.GetChild(0);
+        // Add celestial body script
+        model.gameObject.AddComponent<Planet>();
+        Planet planet = model.gameObject.GetComponent<Planet>();
+        planet.shapeSettings = shapeSettings;
+        planet.colourSettings = colourSettings;
+        planet.resolution = 256;
+
+        planet.GeneratePlanet();
+
+        newPlanet.transform.position = point;
+
+        return newPlanet;
+    }
 
     public void Place()
     {
@@ -29,8 +52,9 @@ public class RaycastPlacing : MonoBehaviour
             if (hit.transform.gameObject.tag == "PlacingPlane")
             {
                 //Debug.Log("Instantiating new sphere to place");
-                currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity, parent.transform);
+                // currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity, parent.transform);
                 GlobalVars.Pause();
+                currentlyPlacing = PlacePlanet(hit.point, Quaternion.identity, parent.transform);
             }
         }
         else if (placing)
@@ -45,7 +69,7 @@ public class RaycastPlacing : MonoBehaviour
                 Destroy(currentlyPlacing);
             }
             currentlyPlacing = null;
-            GlobalVars.Resume();
+            // GlobalVars.Resume();
         }
     }
 
@@ -90,7 +114,7 @@ public class RaycastPlacing : MonoBehaviour
 
                 placing = false;
                 currentlyPlacing = null;
-                GlobalVars.Resume();
+                // GlobalVars.Resume();
             }
         } else
         {
@@ -100,7 +124,7 @@ public class RaycastPlacing : MonoBehaviour
                 Destroy(currentlyPlacing);
             }
             currentlyPlacing = null;
-            GlobalVars.Resume();
+            // GlobalVars.Resume();
         }
     }
 }

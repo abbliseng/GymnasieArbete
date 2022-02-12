@@ -173,10 +173,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokeForce: 0
   sphere: {fileID: 5330467391111431600, guid: fa51d0adc53c6de419efad21fcc50f10, type: 3}
-  placing: 0
   currentlyPlacing: {fileID: 0}
   ScrollSensitvity: 15
   cam: {fileID: 5833538246142152315}
+  parent: {fileID: 0}
+  basic: {fileID: 9003540462947849548, guid: 7e61a419d76bd56468bec8e317bb53c9, type: 3}
+  colourSettings: {fileID: 11400000, guid: 447fa9201a7266b4893f845e0b877468, type: 2}
+  shapeSettings: {fileID: 11400000, guid: c5cece8d59ccdc64a944440858a81218, type: 2}
 --- !u!1 &5833538247277488346
 GameObject:
   m_ObjectHideFlags: 0
