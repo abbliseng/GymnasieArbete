@@ -9,7 +9,6 @@ public class Simulation : MonoBehaviour
     static Simulation instance;
     private float timeElapsed;
 
-    [Range(0,100)]
     public float sped = 1f;
 
     private void OnValidate() {
@@ -26,23 +25,37 @@ public class Simulation : MonoBehaviour
 
     }
 
-    void PlaceObject(GameObject placingObject) {
-        GlobalVars.placingObject = placingObject;
-        GlobalVars.placing = true;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            GlobalVars.ChangeSpeed(1f);
+        }
+        if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            GlobalVars.ChangeSpeed(-1f);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (GlobalVars.paused)
+            {
+                GlobalVars.Resume();
+            } else
+            {
+                GlobalVars.Pause();
+            }
+        }
     }
 
     private void FixedUpdate() {
         Time.timeScale = GlobalVars.timeScale;
-        if (GlobalVars.simulateCelestialBodies) {
-            UpdateCelestialBodyPhysics();
-        }
-        // Handle gameobject placing
-        if (GlobalVars.placing) {
-
+        if (!GlobalVars.paused)
+        {
+            if (GlobalVars.simulateCelestialBodies) {
+                UpdateCelestialBodyPhysics();
+            }
         }
     }
-
-    
 
     private void UpdateCelestialBodyPhysics() {
         bodies = FindObjectsOfType<CelestialBody> (); // TODO Optimize, must be better way then to check all the time.

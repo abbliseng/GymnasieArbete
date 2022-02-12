@@ -46,7 +46,7 @@ public class MouseMovement : MonoBehaviour
             speed = defSpeed * speedMult;
         } else
         {
-            speed = 24f;
+            speed = defSpeed;
         }
 
         float h = Input.GetAxisRaw("Horizontal");

@@ -8,12 +8,25 @@ public static class GlobalVars
     public const float physicsTimeStep = 0.01f;
     public const bool cheatsEnabled = true;
 
+    public static bool paused = false;
     public static float timeScale = 10f;
     public static int orbitSegments = 100;
 
     public static bool simulateCelestialBodies = true;
     public static bool simulateVirtualBodies = false;
-    // Place new spheres
-    public static bool placing = false;
-    public static GameObject placingObject = null;
+
+    public static void Pause()
+    {
+        paused = true;
+    }
+    public static void Resume()
+    {
+        paused = false;
+    }
+
+    public static void ChangeSpeed(float inc = 1f)
+    {
+        timeScale += inc;
+    }
+
 }
