@@ -295,5 +295,6 @@ MonoBehaviour:
   initialVelocity: {x: 0, y: 0, z: 3}
   bodyName: W
   radius: 40
+  immovable: 0
   rb: {fileID: 6735367762564527338}
   tf: {fileID: 6735367761306648617}

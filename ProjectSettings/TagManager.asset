@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GravityEffected
   - PlacingPlane
+  - Celestial
   layers:
   - Default
   - TransparentFX

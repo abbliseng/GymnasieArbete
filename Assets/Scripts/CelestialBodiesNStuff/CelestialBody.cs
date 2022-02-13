@@ -11,6 +11,7 @@ public class CelestialBody : MonoBehaviour
     public Vector3 initialVelocity;
     public string bodyName = "Unnamed";
     public float radius;
+    public bool immovable = false;
 
     public Vector3 velocity { get; private set; }
     public float mass { get; private set; }
@@ -25,12 +26,17 @@ public class CelestialBody : MonoBehaviour
     }
 
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
-        velocity += acceleration * timeStep;
+        if (!immovable)
+        {
+            velocity += acceleration * timeStep;
+        }
     }
 
     public void UpdatePosition (float timeStep) {
-        rb.MovePosition (rb.position + velocity * timeStep);
-
+        if (!immovable)
+        {
+            rb.MovePosition (rb.position + velocity * timeStep);
+        }
     }
 
     void OnValidate () {

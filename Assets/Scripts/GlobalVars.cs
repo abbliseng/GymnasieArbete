@@ -27,6 +27,10 @@ public static class GlobalVars
     public static void ChangeSpeed(float inc = 1f)
     {
         timeScale += inc;
+        if (timeScale < 1f)
+        {
+            timeScale = 1f;
+        }
     }
 
 }
