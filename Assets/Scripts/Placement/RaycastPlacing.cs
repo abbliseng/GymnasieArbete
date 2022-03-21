@@ -8,17 +8,19 @@ public class RaycastPlacing : MonoBehaviour
     
     public float pokeForce;
     [Header("Placing stuff")]
-    public GameObject sphere;
     public GameObject currentlyPlacing = null;
     public float ScrollSensitvity = 2f;
     public Camera cam;
     public GameObject parent;
+    public SolarSystem _solarSystem;
 
     private float raycastMaxDistance = 100000.0f;
     [Header("Planet Preset Stuff")]
     public GameObject basic;
     public ColourSettings colourSettings;
     public ShapeSettings shapeSettings;
+
+    private GameObject centerOfRotation = null;
 
     public GameObject PlacePlanet(Vector3 point, Quaternion quar, Transform p)
     {
@@ -53,7 +55,9 @@ public class RaycastPlacing : MonoBehaviour
             {
                 //Debug.Log("Instantiating new sphere to place");
                 // currentlyPlacing = Instantiate(sphere, hit.point, Quaternion.identity, parent.transform);
+                
                 GlobalVars.Pause();
+                
                 currentlyPlacing = PlacePlanet(hit.point, Quaternion.identity, parent.transform);
             }
         }
@@ -85,19 +89,22 @@ public class RaycastPlacing : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
                 {
-                    currentlyPlacing.transform.position = new Vector3(hit.point.x, currentlyPlacing.transform.position.y, hit.point.z);
-                    if (currentlyPlacing.transform.position.y != 0)
+                    if (hit.transform.gameObject.tag == "PlacingPlane")
                     {
-                        LineRenderer lr;
-                        if (currentlyPlacing.GetComponent<LineRenderer>() == null)
+                        currentlyPlacing.transform.position = new Vector3(hit.point.x, currentlyPlacing.transform.position.y, hit.point.z);
+                        if (currentlyPlacing.transform.position.y != 0)
                         {
-                            currentlyPlacing.AddComponent<LineRenderer>();
+                            LineRenderer lr;
+                            if (currentlyPlacing.GetComponent<LineRenderer>() == null)
+                            {
+                                currentlyPlacing.AddComponent<LineRenderer>();
+                            }
+                            lr = currentlyPlacing.GetComponent<LineRenderer>();
+                            lr.startWidth = 1f;
+                            lr.endWidth = 1f;
+                            lr.startColor = Color.white;
+                            lr.SetPositions(new[] { currentlyPlacing.transform.position, hit.point });
                         }
-                        lr = currentlyPlacing.GetComponent<LineRenderer>();
-                        lr.startWidth = 1f;
-                        lr.endWidth = 1f;
-                        lr.startColor = Color.white;
-                        lr.SetPositions(new[] { currentlyPlacing.transform.position, hit.point });
                     }
                 }
                 if (Input.GetAxis("Mouse ScrollWheel") != 0f && Input.GetKey(KeyCode.LeftControl))
@@ -110,10 +117,30 @@ public class RaycastPlacing : MonoBehaviour
             // Lock the sphere's position when lmb is pressed.
             if (Input.GetMouseButtonDown(0) && placing)
             {
+                if (Physics.Raycast(ray, out hit, raycastMaxDistance, mask))
+                {
+                    if (hit.transform.gameObject.tag == "Celestial")
+                    {
+                        Debug.Log("HIT: " + hit.transform.gameObject.name);
+                        centerOfRotation = hit.transform.gameObject;
+                        return;
+                    }
+                }
+
                 Destroy(currentlyPlacing.GetComponent<LineRenderer>());
+                currentlyPlacing.GetComponent<TrailRenderer>().enabled = true;
+
+                // _solarSystem.UpdateCelestials(currentlyPlacing);
+                // SolarSystem.celestials.Add(currentlyPlacing);
+                if (centerOfRotation != null)
+                {
+                    _solarSystem.InitialVelocity(currentlyPlacing, centerOfRotation);
+                }
 
                 placing = false;
                 currentlyPlacing = null;
+                centerOfRotation = null;
+
                 // GlobalVars.Resume();
             }
         } else
