@@ -1,0 +1,29 @@
+
+-- Planeter --
+Resolution: 256
+Auto Update: true
+Shape Settings:
+	Planet Radius
+	Noise Layers
+		Enabled
+		Use First Layer Mask
+		Filter Type: Simple/Ridgid
+			Simple:
+				Strength
+				Num Layers
+				Base Roughness
+				Roughness
+				Persistance
+				Center
+				Min Value
+			Ridgid:
+				Strength
+				Num Layers
+				Base Roughness
+				Roughness
+				Persistance
+				Center
+				Min Value
+				Weight Multiplayer
+Colour Settings:
+	Planet Colour
