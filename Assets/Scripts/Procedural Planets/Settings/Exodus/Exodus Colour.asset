@@ -12,5 +12,124 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3acc78d49bcd364fab91f4bde7abae3, type: 3}
   m_Name: Exodus Colour
   m_EditorClassIdentifier: 
-  planetColour: {r: 1, g: 0.3915094, b: 0.3915094, a: 0}
   planetMaterial: {fileID: 2100000, guid: 8d640207678066e4190a6f3a38043f22, type: 2}
+  biomeColourSettings:
+    biomes:
+    - gradient:
+        serializedVersion: 2
+        key0: {r: 0, g: 0.39215687, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 1}
+        key2: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+        key3: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 13878
+        ctime2: 46260
+        ctime3: 63029
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 0
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 4
+        m_NumAlphaKeys: 2
+      tint: {r: 0, g: 0, b: 0, a: 0}
+      startHeight: 0
+      tintPercent: 0
+    - gradient:
+        serializedVersion: 2
+        key0: {r: 0, g: 0.39215687, b: 1, a: 1}
+        key1: {r: 0.745283, g: 0.6309224, b: 0.25663045, a: 1}
+        key2: {r: 0.29036137, g: 0.7075472, b: 0.3291037, a: 0}
+        key3: {r: 0.33067703, g: 0.5188679, b: 0.2667764, a: 0}
+        key4: {r: 0.6415094, g: 0.3496928, b: 0.14222142, a: 0}
+        key5: {r: 1, g: 1, b: 1, a: 0}
+        key6: {r: 0.049928807, g: 0.7133182, b: 0.9622642, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 2699
+        ctime2: 8288
+        ctime3: 22745
+        ctime4: 55127
+        ctime5: 65535
+        ctime6: 65535
+        ctime7: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 0
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 6
+        m_NumAlphaKeys: 2
+      tint: {r: 1, g: 0, b: 0, a: 0}
+      startHeight: 0.539
+      tintPercent: 0
+    - gradient:
+        serializedVersion: 2
+        key0: {r: 0, g: 0.39215687, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 1}
+        key2: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+        key3: {r: 0, g: 0, b: 0, a: 0}
+        key4: {r: 0, g: 0, b: 0, a: 0}
+        key5: {r: 0, g: 0, b: 0, a: 0}
+        key6: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 0, g: 0, b: 0, a: 0}
+        ctime0: 0
+        ctime1: 13878
+        ctime2: 44525
+        ctime3: 0
+        ctime4: 0
+        ctime5: 0
+        ctime6: 0
+        ctime7: 0
+        atime0: 0
+        atime1: 65535
+        atime2: 0
+        atime3: 0
+        atime4: 0
+        atime5: 0
+        atime6: 0
+        atime7: 0
+        m_Mode: 0
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 2
+      tint: {r: 0.061918736, g: 0, b: 1, a: 0}
+      startHeight: 1
+      tintPercent: 0
+    noise:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 1
+        numLayers: 3
+        baseRoughness: 1
+        roughness: 1.94
+        persistance: 0.97
+        center: {x: 0, y: 0, z: 0}
+        minValue: 0
+      ridgidNoiseSettings:
+        strength: 1
+        numLayers: 1
+        baseRoughness: 1
+        roughness: 2
+        persistance: 0.5
+        center: {x: 0, y: 0, z: 0}
+        minValue: 0
+        weightMultiplier: 0.8
+    noiseOffset: 0.01
+    noiseStrength: 0.1
+    blendAmount: 0
