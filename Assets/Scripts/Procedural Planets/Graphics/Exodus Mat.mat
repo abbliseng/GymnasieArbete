@@ -114,7 +114,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.75
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -126,5 +126,5 @@ Material:
     - _Color: {r: 1, g: 0.3915094, b: 0.3915094, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _elevationMinMax: {r: 5, g: 5.46542, b: 0, a: 0}
+    - _elevationMinMax: {r: -0.0976903, g: 0.093083926, b: 0, a: 0}
   m_BuildTextureStacks: []
