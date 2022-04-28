@@ -35,12 +35,12 @@ Material:
     m_Floats:
     - _CellDensity: 250
     - _CellSpeed: 1
-    - _Intensity: 1
+    - _Intensity: 100
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SolarFlare: 50
     m_Colors:
-    - _BaseColor: {r: 1.592149, g: 0.83358586, b: 0.2417399, a: 0}
+    - _BaseColor: {r: 771.0118, g: 401.56863, b: 112.43922, a: 0}
     - _CellColor: {r: 2.007744, g: 0.31535247, b: 0.03153525, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1176757126002842854

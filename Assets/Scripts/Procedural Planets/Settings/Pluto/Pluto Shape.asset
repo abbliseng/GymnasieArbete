@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdbe25914e5150b46b7a2aec328fa5a3, type: 3}
-  m_Name: Achilles Shape
+  m_Name: Pluto Shape
   m_EditorClassIdentifier: 
-  planetRadius: 24
+  planetRadius: 7
   noiseLayers:
   - enabled: 1
     useFirstLayerMask: 0
     noiseSettings:
       filterType: 0
       simpleNoiseSettings:
-        strength: 0.8
-        numLayers: 5
-        baseRoughness: 0.8
-        roughness: 0.4
-        persistance: 0
+        strength: 0.07
+        numLayers: 4
+        baseRoughness: 1.07
+        roughness: 2
+        persistance: 0.5
         center: {x: 0, y: 0, z: 0}
-        minValue: 1
+        minValue: 0.98
       ridgidNoiseSettings:
         strength: 0
         numLayers: 0
@@ -35,3 +35,24 @@ MonoBehaviour:
         center: {x: 0, y: 0, z: 0}
         minValue: 0
         weightMultiplier: 0
+  - enabled: 1
+    useFirstLayerMask: 1
+    noiseSettings:
+      filterType: 1
+      simpleNoiseSettings:
+        strength: 0
+        numLayers: 0
+        baseRoughness: 0
+        roughness: 0
+        persistance: 0
+        center: {x: 0, y: 0, z: 0}
+        minValue: 0
+      ridgidNoiseSettings:
+        strength: 0.9
+        numLayers: 4
+        baseRoughness: 1.59
+        roughness: 3.3
+        persistance: 0.5
+        center: {x: 2.02, y: 0, z: 0}
+        minValue: 0.37
+        weightMultiplier: 0.78
