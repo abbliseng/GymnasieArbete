@@ -11,6 +11,7 @@ public class ButtonHandler : MonoBehaviour
     [Header("Pause/Play")]
     public GameObject pause;
     public GameObject play;
+    public GameObject esc_menu;
 
     [Header("Time")]
     public float sped = 0f;
@@ -32,6 +33,16 @@ public class ButtonHandler : MonoBehaviour
         GlobalVars.Resume();
     }
 
+    public void EscContinue()
+    {
+        esc_menu.SetActive(false);
+    }
+
+    public void EscQuit()
+    {
+        Application.Quit();
+    }
+
     private void Update()
     {
         KeyHandler();
@@ -49,7 +60,7 @@ public class ButtonHandler : MonoBehaviour
 
     void KeyHandler()
     {
-        if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.P))
         {
             GlobalVars.ChangeSpeed(10f);
             UpdateTimeDisplay(GlobalVars.timeScale);
@@ -69,6 +80,10 @@ public class ButtonHandler : MonoBehaviour
             {
                 GlobalVars.Pause();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            esc_menu.SetActive(!esc_menu.activeSelf);
         }
     }
 
